@@ -1,0 +1,61 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920px, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Discord Wall of Text Splitter</title>
+</head>
+
+<body>
+    <h3>Discord Wall of Text Splitter</h3>
+    <p>Put your wall of text here</p>
+
+    <div><textarea id="the_box" cols="120" scrollbar="true" rows="25" style="font-family: 'Monaco', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva,
+        Verdana, sans-serif; font-size: 14pt;"></textarea></div>
+
+
+    <button id="the_but" onclick="split_it()" style="background-color:#599bb3;
+	border-radius:5px;
+	border:1px solid #29668f;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:11px 23px;">SPLIT ME</button>
+
+    <div id="splitted"></div>
+</body>
+
+<script>
+
+
+    let text = document.getElementById('the_box');
+    let contents = null;
+    let num_splits = 0;
+
+    let results = document.getElementById('splitted');
+
+    function split_it() {
+        contents = text.value;
+        num_splits = Math.ceil(contents.length / 1990);
+        let idx = 0;
+        let pos = 0;
+        let prev = 0;
+        results.innerHTML = "<h3> Your text was split into " + num_splits + " sections:";
+        while(num_splits != idx) {
+            pos = contents.lastIndexOf(' ', 1990 * ++idx);
+            results.innerHTML += "<p>" + contents.substring(prev, pos) + "</p>";
+            prev = pos + 1;
+
+        }
+
+    }
+
+    
+
+</script>
+
+</html>
