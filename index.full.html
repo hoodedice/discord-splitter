@@ -47,7 +47,7 @@
         results.innerHTML = "<h3> Your text was split into " + num_splits + " sections:";
         while(num_splits != idx) {
             pos = contents.lastIndexOf(' ', 1990 * ++idx);
-            results.innerHTML += "<p>" + contents.substring(prev, pos) + "</p>";
+            results.innerHTML += "<pre>" + contents.substring(prev, pos) + "</pre>";
             prev = pos + 1;
 
         }
