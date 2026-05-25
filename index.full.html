@@ -44,10 +44,10 @@
         let idx = 0;
         let pos = 0;
         let prev = 0;
-        results.innerHTML = "<h3> Your text was split into " + num_splits + " sections:";
+        results.innerHTML = "<h3> Your text was split into " + num_splits + " sections:</h3>";
         while(num_splits != idx) {
             pos = contents.lastIndexOf(' ', 1990 * ++idx);
-            results.innerHTML += "<pre>" + contents.substring(prev, pos) + "</pre>";
+            results.innerHTML += "<hr><pre>" + contents.substring(prev, pos) + "</pre>";
             prev = pos + 1;
 
         }
