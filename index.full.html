@@ -33,25 +33,43 @@
 
 
     let text = document.getElementById('the_box');
-    let contents = null;
-    let num_splits = 0;
-
     let results = document.getElementById('splitted');
 
     function split_it() {
-        contents = text.value;
-        num_splits = Math.ceil(contents.length / 1990);
-        let idx = 0;
-        let pos = 0;
-        let prev = 0;
-        results.innerHTML = "<h3> Your text was split into " + num_splits + " sections:</h3>";
-        while(num_splits != idx) {
-            pos = contents.lastIndexOf(' ', 1990 * ++idx);
-            results.innerHTML += "<hr><pre>" + contents.substring(prev, pos) + "</pre>";
-            prev = pos + 1;
+        let contents = text.value;
+        let maxLength = 1990;
+        let chunks = [];
+        let start = 0;
 
+        while (start < contents.length) {
+            let end = Math.min(start + maxLength, contents.length);
+            let space = contents.lastIndexOf(' ', end);
+
+            if (space > start) {
+                end = space;
+            }
+
+            chunks.push(contents.slice(start, end));
+            start = end;
+
+            if (contents[start] == ' ') {
+                start++;
+            }
         }
 
+        results.textContent = '';
+
+        let heading = document.createElement('h3');
+        heading.textContent = 'Your text was split into ' + chunks.length + ' sections:';
+        results.appendChild(heading);
+
+        chunks.forEach(function(chunk) {
+            results.appendChild(document.createElement('hr'));
+
+            let pre = document.createElement('pre');
+            pre.textContent = chunk;
+            results.appendChild(pre);
+        });
     }
 
     
